@@ -1,16 +1,16 @@
 /**
- * 
+ *
  * Manipulating the DOM exercise.
  * Exercise programmatically builds navigation,
  * scrolls to anchors from navigation,
  * and highlights section in viewport upon scrolling.
- * 
+ *
  * Dependencies: None
- * 
+ *
  * JS Version: ES2015/ES6
- * 
+ *
  * JS Standard: ESlint
- * 
+ *
 */
 
 /**
@@ -20,22 +20,27 @@
 
 /**
  * Define Global Variables
- * 
+ *
 */
 
+const nav = document.getElementById('navbar__list');
+const section = document.querySelectorAll('section');
 
 /**
  * End Global Variables
  * Start Helper Functions
- * 
+ *
 */
 
+// Create array for each section
 
+list_sections = Array.from(document.getElementsByTagName("section"));
 
+console.log(list_sections);
 /**
  * End Helper Functions
  * Begin Main Functions
- * 
+ *
 */
 
 // build the nav
@@ -50,10 +55,10 @@
 /**
  * End Main Functions
  * Begin Events
- * 
+ *
 */
 
-// Build menu 
+// Build menu
 
 // Scroll to section on link click
 
