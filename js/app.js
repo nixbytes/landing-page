@@ -37,6 +37,12 @@ const section = document.querySelectorAll('section');
 list_sections = Array.from(document.getElementsByTagName("section"));
 
 console.log(list_sections);
+
+// space sections with flex
+nav.style.display = "flex"
+nav.style.textAlign = "center"
+nav.style.justifyContent = "space-evenly"
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -45,7 +51,11 @@ console.log(list_sections);
 
 // build the nav
 
-
+list_sections.forEach((sections, index) => {
+  let li = document.createElement('li');
+  let anchor = document.createElement('a');
+  console.log(`${sections} : ${index}`);
+});
 // Add class 'active' to section when near top of viewport
 
 
