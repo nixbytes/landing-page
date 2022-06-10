@@ -36,20 +36,24 @@ const section = document.querySelectorAll("section");
 
 list_sections = Array.from(document.getElementsByTagName("section"));
 
-console.log(list_sections);
+// console.log(list_sections);
 
 // space sections with flex
 nav.style.display = "flex";
 nav.style.textAlign = "center";
-nav.style.justifyContent = "space-evenly";
+nav.style.justifyContent = "flex-end";
 
-/**
+/*
  * End Helper Functions
  * Begin Main Functions
  *
+ * End Main Functions
+ * Begin Events
+ *
  */
 
-// build the nav with each sections 1`
+// Build menu
+// build the nav with each sections
 list_sections.forEach((sections, index) => {
   // create the li for the nav
   let li = document.createElement("li");
@@ -57,7 +61,7 @@ list_sections.forEach((sections, index) => {
   // add attributes to each li element and add index value
   li.setAttribute("id", "li-section" + (index + 1));
   let anchor = document.createElement("a");
-  console.log(`${sections} : ${index}`);
+  // console.log(`${sections} : ${index}`);
 
   // sets all li elements with a class activeNav
   li.setAttribute("class", "activeNav");
@@ -86,6 +90,7 @@ updateLiClass.classList.remove("activeNav");
 
 // Scroll to anchor ID using scrollTO event
 // Add class 'active' to section when near top of viewport
+// Scroll to section on link click
 
 let onClick = function (event) {
   // method cancels the event if it is cancelable
@@ -99,9 +104,9 @@ let onClick = function (event) {
   const lastLi = document.querySelector(".activeNav");
 
   // check for active element and remove the class
-
+  // Set sections as active
   if (lastLi) {
-    //    continue;
+    // continue;
   } else {
     lastLi.classList.remove("activeNav");
   }
@@ -123,7 +128,7 @@ navLinks.forEach((navl) => {
   navl.addEventListener("click", onClick);
 });
 
-// helper function for check viewport
+// helper function for check viewport from https://www.javascripttutorial.net/dom/css/check-if-an-element-is-visible-in-the-viewport/
 
 function isInViewport(element) {
   const rect = element.getBoundingClientRect();
@@ -135,15 +140,3 @@ function isInViewport(element) {
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
-
-/**
- * End Main Functions
- * Begin Events
- *
- */
-
-// Build menu
-
-// Scroll to section on link click
-
-// Set sections as active
