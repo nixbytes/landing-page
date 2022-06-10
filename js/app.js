@@ -80,7 +80,7 @@ list_sections.forEach((sections, index) => {
 // and set the first with your-active-class and others with activeNav
 // the css/style.css for style
 
-const updateLiClass = document.getElementId("li-section1");
+const updateLiClass = document.getElementById("li-section1");
 updateLiClass.classList.add("your-active-class");
 updateLiClass.classList.remove("activeNav");
 
