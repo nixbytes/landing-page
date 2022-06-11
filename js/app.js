@@ -23,8 +23,7 @@
  *
  */
 
-const nav = document.getElementById("navbar__list");
-const section = document.querySelectorAll("section");
+const { nav, navLinks } = querySections();
 
 /**
  * End Global Variables
@@ -34,15 +33,10 @@ const section = document.querySelectorAll("section");
 
 // Create array for each section
 
-list_sections = Array.from(document.getElementsByTagName("section"));
-
 // console.log(list_sections);
 
 // space sections with flex
-nav.style.display = "flex";
-nav.style.textAlign = "center";
-nav.style.justifyContent = "flex-end";
-
+css(nav, { display: "flex", textAlign: "center", justifyContent: "flex-end" });
 /*
  * End Helper Functions
  * Begin Main Functions
@@ -52,9 +46,8 @@ nav.style.justifyContent = "flex-end";
  *
  */
 
-// Build menu
-// build the nav with each sections
-list_sections.forEach((sections, index) => {
+// Build the navigation menu
+list_sections.forEach((_sections, index) => {
   // create the li for the nav
   let li = document.createElement("li");
 
@@ -84,9 +77,7 @@ list_sections.forEach((sections, index) => {
 // and set the first with your-active-class and others with activeNav
 // the css/style.css for style
 
-const updateLiClass = document.getElementById("li-section1");
-updateLiClass.classList.add("your-active-class");
-updateLiClass.classList.remove("activeNav");
+updateLi();
 
 // Scroll to anchor ID using scrollTO event
 // Add class 'active' to section when near top of viewport
@@ -96,20 +87,11 @@ let onClick = function (event) {
   // method cancels the event if it is cancelable
   event.preventDefault();
 
-  const href = this.getAttribute("href");
-  // Get the offsetTop position of href
-  const getTop = document.querySelector(href).offsetTop;
-
-  // get last click navbar and remove active
-  const lastLi = document.querySelector(".activeNav");
+  const { lastLi, href, getTop } = getPostion();
 
   // check for active element and remove the class
-  // Set sections as active
-  if (lastLi) {
-    // continue;
-  } else {
-    lastLi.classList.remove("activeNav");
-  }
+  // Set sections as active with if condition
+  lastLi && lastLi.classList.remove("activeNav");
 
   const selectLi = document.querySelector(
     "#li-section" + href.slice(href.indexOf("n") + 1)
@@ -120,23 +102,35 @@ let onClick = function (event) {
     top: getTop,
     behavior: "smooth",
   });
+
+  function getPostion() {
+    const href = this.getAttribute("href");
+
+    // Get the offsetTop position of href
+    const getTop = document.querySelector(href).offsetTop;
+
+    // get last click navbar and remove active
+    const lastLi = document.querySelector(".activeNav");
+    return { lastLi, href, getTop };
+  }
 };
 
-const navLinks = document.querySelectorAll(".navbar__menu ul a");
+// call for each link click
 
 navLinks.forEach((navl) => {
   navl.addEventListener("click", onClick);
 });
 
-// helper function for check viewport from https://www.javascripttutorial.net/dom/css/check-if-an-element-is-visible-in-the-viewport/
+function querySections() {
+  const nav = document.getElementById("navbar__list");
+  const section = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".navbar__menu ul a");
+  list_sections = Array.from(document.getElementsByTagName("section"));
+  return { nav, navLinks };
+}
 
-function isInViewport(element) {
-  const rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
+function updateLi() {
+  const updateLiClass = document.getElementById("li-section1");
+  updateLiClass.classList.add("your-active-class");
+  updateLiClass.classList.remove("activeNav");
 }
