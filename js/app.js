@@ -36,7 +36,7 @@ const { nav, navLinks } = querySections();
 // console.log(list_sections);
 
 // space sections with flex
-css(nav, { display: "flex", textAlign: "center", justifyContent: "flex-end" });
+nav.style.cssText = "display: flex;textAlign:center;justifyContent: flex-end";
 /*
  * End Helper Functions
  * Begin Main Functions
