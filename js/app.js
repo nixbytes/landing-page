@@ -47,7 +47,7 @@ nav.style.cssText = "display: flex;text-align:center;justify-content: flex-end";
  */
 
 // build the nav with each sections 1`
-list_sections.forEach((sections, index) => {
+list_sections.forEach((_sections, index) => {
   // create the li for the nav
   let li = document.createElement("li");
 
