@@ -49,7 +49,7 @@ nav.style.cssText = "display: flex;text-align:center;justify-content: flex-end";
 // build the nav with each sections 1`
 list_sections.forEach((_sections, index) => {
   // create the li for the nav
-  let li = document.createElement("li");
+  const li = document.createElement("li");
 
   // add attributes to each li element and add index value
   li.setAttribute("id", "li-section" + (index + 1));
@@ -75,9 +75,9 @@ list_sections.forEach((_sections, index) => {
 // and set the first with your-active-class and others with activeNav
 // the css/style.css for style
 
-const updateLiClass = document.getElementById("li-section1");
-updateLiClass.classList.add("your-active-class");
-updateLiClass.classList.remove("activeNav");
+// const updateLiClass = document.getElementById("li-section1");
+// updateLiClass.classList.add("your-active-class");
+// updateLiClass.classList.remove("activeNav");
 
 const navLinks = document.querySelectorAll(".navbar__menu ul a");
 
@@ -121,8 +121,10 @@ function checkSection(distance) {
 
 // Scroll to anchor ID using scrollTO event
 // Add class 'active' to section when near top of viewport
+// defining variable for the li class name in navbar - to use for setting 'active' class
+let activeNav = document.getElementsByClassName('activeNav');
 
-function activeNav(_section) {
+function activeView(_section) {
   list_sections.forEach((section) => {
     const distance = section.getBoundingClientRect();
     // Check if there is an active element. If so, remove the
@@ -150,7 +152,7 @@ function activeNav(_section) {
 }
 
 // calling the function that scrolls to the anchor element for section
-document.addEventListener("scroll", activeNav);
+document.addEventListener("scroll", activeView);
 
 function getNavgation() {
   const nav = document.getElementById("navbar__list");

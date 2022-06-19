@@ -199,13 +199,13 @@ section.your-active-class {
 }
 
 section.your-active-class .landing__container::before {
-    opacity: 1;
-    animation: rotate 4s linear 0s infinite forwards;
+    opacity: .5;
+    animation: rotate 3s linear 0s infinite forwards;
 }
 
 section.your-active-class .landing__container::after {
-    opacity: 1;
-    animation: rotate 5s linear 0s infinite forwards reverse;
+    opacity: .5;
+    animation: rotate 4s linear 0s infinite forwards reverse;
 }
 
 /* Section Active Styles Keyframe Animations */
