@@ -71,15 +71,10 @@ list_sections.forEach((_sections, index) => {
 });
 
 // next we need to change the class for li on the navbar
-// and set the first with your-active-class and others with activeNav
-// the css/style.css for style
-
-const updateLiClass = document.getElementById("li-section1");
-updateLiClass.classList.add("your-active-class");
-updateLiClass.classList.remove("activeNav");
 
 const navLinks = document.querySelectorAll(".navbar__menu ul a");
 
+// Scroll to anchor ID using scrollTO event
 let onClick = function (event) {
   // method cancels the event if it is cancelable
   event.preventDefault();
@@ -100,60 +95,46 @@ navLinks.forEach((navl) => {
 
 // helper function for check viewport
 
-function isInViewport(section) {
-  const distance = section.getBoundingClientRect();
-  return (
-    distance.top >= 0 &&
-    distance.left >= 0 &&
-    distance.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    distance.right <=
-      (window.innerWidth || document.documentElement.clientWidth)
-  );
-}
-
-// check section area that should be active on the page
-
-function checkSection(distance) {
+function isInViewport(distance) {
   return distance.left >= distance.top && distance.left <= distance.bottom;
 }
 
-// Scroll to anchor ID using scrollTO event
-// Add class 'active' to section when near top of viewport
-// defining variable for the li class name in navbar - to use for setting 'active' class
-let activeNav = document.getElementsByClassName("activeNav");
+const activeNav = document.getElementsByClassName("activeNav");
 
 function activeView(_section) {
   list_sections.forEach((section) => {
     const distance = section.getBoundingClientRect();
     // Check if there is an active element. If so, remove the
     // class, remove the activeNav class, and add a your-active-class
-    // class with style for animation.
-    if (checkSection(distance)) {
-      section.classList.add("your-active-class");
-
-      const lastActive = document.querySelector(".activeNav");
-
-      lastActive && lastActive.classList.remove(".activeNav");
-      lastActive && lastActive.classList.remove("activeNav");
-
-      const currentActive = document.querySelector("#li-" + section.id);
-
-      currentActive.setAttribute("class", "activeNav");
-      currentActive.classList.remove("activeNav");
-      currentActive.classList.add("your-active-class");
-
-    } else {
-      section.classList.remove("your-active-class");
-    }
+    activeSections(section, distance);
   });
 }
 
-// calling the function that scrolls to the anchor element for section
-document.addEventListener("scroll", activeView);
+function activeSections(section, distance) {
+  // define current and last active element for switching
+  // or highlifght the nav
+  section.classList.add("your-active-class");
+  const currentActive = document.querySelector("#li-" + section.id);
+  const lastActive = document.querySelector(".activeNav");
+
+  if (isInViewport(distance)) {
+    lastActive && lastActive.classList.remove(".activeNav");
+    lastActive && lastActive.classList.remove("activeNav");
+
+    currentActive.setAttribute("class", "activeNav");
+    currentActive.classList.add("your-active-class");
+  } else {
+    section.classList.remove("your-active-class");
+    currentActive.classList.remove("your-active-class");
+    currentActive.classList.remove("activeNav");
+  }
+}
 
 function getNavgation() {
   const nav = document.getElementById("navbar__list");
   const section = document.querySelectorAll("section");
   return { nav, section };
 }
+
+// calling the function that scrolls to the anchor element for section
+document.addEventListener("scroll", activeView);
