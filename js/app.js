@@ -46,7 +46,7 @@ nav.style.cssText = "display: flex;text-align:center;justify-content: flex-end";
  *
  */
 
-// build the nav with each sections 1`
+// build the nav with each sections
 list_sections.forEach((_sections, index) => {
   // create the li for the nav
   const li = document.createElement("li");
@@ -54,7 +54,6 @@ list_sections.forEach((_sections, index) => {
   // add attributes to each li element and add index value
   li.setAttribute("id", "li-section" + (index + 1));
   let anchor = document.createElement("a");
-  //  console.log(`${sections} : ${index}`);
 
   // sets all li elements with a class activeNav
   li.setAttribute("class", "activeNav");
@@ -75,9 +74,9 @@ list_sections.forEach((_sections, index) => {
 // and set the first with your-active-class and others with activeNav
 // the css/style.css for style
 
-// const updateLiClass = document.getElementById("li-section1");
-// updateLiClass.classList.add("your-active-class");
-// updateLiClass.classList.remove("activeNav");
+const updateLiClass = document.getElementById("li-section1");
+updateLiClass.classList.add("your-active-class");
+updateLiClass.classList.remove("activeNav");
 
 const navLinks = document.querySelectorAll(".navbar__menu ul a");
 
@@ -122,7 +121,7 @@ function checkSection(distance) {
 // Scroll to anchor ID using scrollTO event
 // Add class 'active' to section when near top of viewport
 // defining variable for the li class name in navbar - to use for setting 'active' class
-let activeNav = document.getElementsByClassName('activeNav');
+let activeNav = document.getElementsByClassName("activeNav");
 
 function activeView(_section) {
   list_sections.forEach((section) => {
@@ -144,7 +143,6 @@ function activeView(_section) {
       currentActive.classList.remove("activeNav");
       currentActive.classList.add("your-active-class");
 
-      section.cssText = "animation: mymove 1s 1;";
     } else {
       section.classList.remove("your-active-class");
     }
